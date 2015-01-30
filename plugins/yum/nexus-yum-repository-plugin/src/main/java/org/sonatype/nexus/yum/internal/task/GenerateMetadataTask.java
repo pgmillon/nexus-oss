@@ -308,7 +308,7 @@ public class GenerateMetadataTask
     if (!shouldForceFullScan()) {
       commandLine.append(" --update");
     }
-    commandLine.append(" --verbose --no-database");
+    commandLine.append(" --verbose --no-database -s sha1");
     commandLine.append(" --outputdir ").append(getRepoDir().getAbsolutePath());
     commandLine.append(" --pkglist ").append(packageList.getAbsolutePath());
     commandLine.append(" --cachedir ").append(createCacheDir().getAbsolutePath());

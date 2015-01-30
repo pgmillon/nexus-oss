@@ -228,7 +228,7 @@ public class MetadataProcessor
       if (primaryHref.contains(primaryChecksum)) {
         repository.deleteItem(false, new ResourceStoreRequest("/" + primaryHref));
         primaryHref = primaryHref.replace(
-            primaryChecksum, getDigest("SHA-256", new ByteArrayInputStream(primaryContent))
+            primaryChecksum, getDigest("SHA-1", new ByteArrayInputStream(primaryContent))
         );
       }
       storeItem(repository, primaryHref, primaryContent, "application/x-gzip");
@@ -263,7 +263,7 @@ public class MetadataProcessor
       try (InputStream in = primaryItem.getInputStream();
            CountingInputStream cis = new CountingInputStream(new GZIPInputStream(new BufferedInputStream(in)))) {
         primaryEl.getElementsByTagName("open-checksum").item(0).setTextContent(String.valueOf(
-            getDigest("SHA-256", cis)
+            getDigest("SHA-1", cis)
         ));
         primaryEl.getElementsByTagName("open-size").item(0).setTextContent(String.valueOf(
             cis.getCount()
@@ -276,7 +276,7 @@ public class MetadataProcessor
       try (InputStream in = primaryItem.getInputStream();
            CountingInputStream cis = new CountingInputStream(new BufferedInputStream(in))) {
         primaryEl.getElementsByTagName("checksum").item(0).setTextContent(String.valueOf(
-            getDigest("SHA-256", cis)
+            getDigest("SHA-1", cis)
         ));
         primaryEl.getElementsByTagName("size").item(0).setTextContent(String.valueOf(
             cis.getCount()
